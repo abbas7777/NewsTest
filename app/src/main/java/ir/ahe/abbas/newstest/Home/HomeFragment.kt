@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
 
@@ -45,6 +46,8 @@ class HostFragment : Fragment() {
 
     private fun setUpViews() {
         val rvNews=viewBinding.rvHomeFragmentNews
+
+        rvNews.layoutManager=LinearLayoutManager(activity!!,LinearLayoutManager.VERTICAL,false)
 
 
     }
