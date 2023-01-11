@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ir.ahe.abbas.newstest.R
+import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +31,22 @@ class HostFragment : Fragment() {
         }
     }
 
+    lateinit var viewBinding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_host, container, false)
+
+        viewBinding=FragmentHomeBinding.inflate(inflater)
+
+        setUpViews()
+        return viewBinding.root
+    }
+
+    private fun setUpViews() {
+        val rvNews=viewBinding.rvHomeFragmentNews
+
+
     }
 
     companion object {

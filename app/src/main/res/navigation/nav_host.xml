@@ -10,7 +10,7 @@
         android:id="@+id/bnav_home"
         android:name="ir.ahe.abbas.newstest.HostFragment"
         android:label="fragment_host"
-        tools:layout="@layout/fragment_host" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/bnav_cat"
         android:name="ir.ahe.abbas.newstest.Cat.CatFragment"
