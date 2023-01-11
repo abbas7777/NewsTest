@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.ktor.client.plugins.resources.*
+import io.ktor.client.request.*
+import io.ktor.client.request.get
+import ir.ahe.abbas.newstest.Api.ApiClient
+import ir.ahe.abbas.newstest.Api.getNews
 import ir.ahe.abbas.newstest.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,9 +39,15 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        val client=ApiClient.client
+        //client.get(getNews("1",",","",""))
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
+
+
+
+
 
     companion object {
         /**

@@ -8,11 +8,14 @@ import io.ktor.http.*
 
 class ApiClient {
 
-    val client= HttpClient(CIO){
-        install(Resources)
-        defaultRequest {
-            host = "newsapi.org/v2"
-            url { protocol = URLProtocol.HTTPS }
+    companion object{
+        val client= HttpClient(CIO){
+            install(Resources)
+            defaultRequest {
+                host = "newsapi.org/v2"
+                url { protocol = URLProtocol.HTTPS }
+            }
         }
     }
+
 }
