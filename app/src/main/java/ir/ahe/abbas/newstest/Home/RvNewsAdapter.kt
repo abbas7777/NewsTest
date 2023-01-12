@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.qualifiers.ActivityContext
 import ir.ahe.abbas.newstest.Models.News
 import ir.ahe.abbas.newstest.R
+import javax.inject.Inject
 
-class RvNewsAdapter (var c:Context,var newsList: List<News>) : RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
+class RvNewsAdapter @Inject constructor(@ActivityContext var c:Context, var newsList: List<News>) : RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
 
 
     inner class RvNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

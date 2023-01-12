@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
+import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,6 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HostFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class HostFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -33,6 +38,9 @@ class HostFragment : Fragment() {
     }
 
     lateinit var viewBinding: FragmentHomeBinding
+    @Inject lateinit var rvNewsAdapter: RvNewsAdapter
+    // var homeViewModel: HomeViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,8 +55,9 @@ class HostFragment : Fragment() {
     private fun setUpViews() {
         val rvNews=viewBinding.rvHomeFragmentNews
 
-        rvNews.layoutManager=LinearLayoutManager(activity!!,LinearLayoutManager.VERTICAL,false)
+        rvNews.layoutManager=LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
 
+        rvNews.adapter=rvNewsAdapter
 
     }
 
