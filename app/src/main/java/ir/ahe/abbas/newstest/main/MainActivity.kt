@@ -9,7 +9,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.databinding.ActivityMainBinding
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding

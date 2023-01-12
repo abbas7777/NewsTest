@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,8 +41,7 @@ class HostFragment : Fragment() {
     }
 
     lateinit var viewBinding: FragmentHomeBinding
-    @Inject lateinit var rvNewsAdapter: RvNewsAdapter
-    // var homeViewModel: HomeViewModel
+    lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +59,19 @@ class HostFragment : Fragment() {
 
         rvNews.layoutManager=LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
 
-        rvNews.adapter=rvNewsAdapter
+       /* CoroutineScope().launch {
+        }
+      */
+        GlobalScope.launch {
+
+            homeViewModel.getNewsLiveData("",",","","").observe(viewLifecycleOwner, Observer {
+                var rvNewsAdapter=RvNewsAdapter(requireActivity(),it)
+                rvNews.adapter=rvNewsAdapter
+            })
+
+
+        }
+
 
     }
 

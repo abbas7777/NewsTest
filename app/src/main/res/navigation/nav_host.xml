@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/bnav_home"
-        android:name="ir.ahe.abbas.newstest.HostFragment"
+        android:name="ir.ahe.abbas.newstest.Home.HostFragment"
         android:label="fragment_host"
         tools:layout="@layout/fragment_home" />
     <fragment

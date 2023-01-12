@@ -1,17 +1,17 @@
 package ir.ahe.abbas.newstest.Home
 
+import io.ktor.client.call.*
 import io.ktor.client.plugins.resources.*
 import io.ktor.client.statement.*
-import ir.ahe.abbas.newstest.Api.ApiClient
+import ir.ahe.abbas.newstest.Api.ApiClients
 import ir.ahe.abbas.newstest.Models.ResponseModel
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class HomeApiDataSource () {
+class HomeApiDataSource @Inject constructor(val api:ApiClients) {
 
-    suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):HttpResponse{
+    suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):ResponseModel{
 
-        return ApiClient.client.get(getNews(q, from, sortBy, apiKey))
+        return api.provideClient().get(getNews(q, from, sortBy, apiKey)).body()
 
     }
 }

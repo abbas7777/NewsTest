@@ -10,7 +10,7 @@ import ir.ahe.abbas.newstest.Models.News
 import ir.ahe.abbas.newstest.R
 import javax.inject.Inject
 
-class RvNewsAdapter @Inject constructor(@ActivityContext var c:Context, var newsList: List<News>) : RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
+class RvNewsAdapter  constructor( var c:Context, var newsList: List<News>) : RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
 
 
     inner class RvNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
