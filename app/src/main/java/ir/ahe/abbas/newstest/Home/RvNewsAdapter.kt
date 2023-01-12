@@ -10,6 +10,7 @@ import ir.ahe.abbas.newstest.R
 
 class RvNewsAdapter (var c:Context,var newsList: List<News>) : RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
 
+
     inner class RvNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     }
