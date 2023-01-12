@@ -16,8 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiClients {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideClient()= HttpClient(CIO){
 
         install(Resources)

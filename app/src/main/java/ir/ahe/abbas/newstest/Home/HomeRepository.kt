@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class HomeRepository @Inject constructor( var homeApiDataSource: HomeApiDataSource) {
+class HomeRepository @Inject constructor( private var homeApiDataSource: HomeApiDataSource) {
 
 
     suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):Flow<List<News>>{

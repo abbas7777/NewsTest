@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor( val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel @Inject constructor( private val homeRepository: HomeRepository) : ViewModel() {
 
 
     @SuppressLint("SuspiciousIndentation")

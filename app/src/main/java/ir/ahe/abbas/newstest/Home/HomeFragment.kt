@@ -24,6 +24,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HostFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
 @AndroidEntryPoint
 class HostFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -58,8 +60,8 @@ class HostFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            homeViewModel.getNewsLiveData("",",","","").observe(viewLifecycleOwner, Observer {
-                var rvNewsAdapter = RvNewsAdapter(requireActivity(), it)
+            homeViewModel.getNewsLiveData("Apple","2023-01-12","popularity","79819d81c81c4b5aa23c25e99ce15029").observe(viewLifecycleOwner, Observer {
+                val rvNewsAdapter = RvNewsAdapter(requireActivity(), it)
                 rvNews.adapter = rvNewsAdapter
 
         })
