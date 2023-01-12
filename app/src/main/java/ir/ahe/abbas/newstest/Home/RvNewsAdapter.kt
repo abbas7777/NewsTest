@@ -15,6 +15,8 @@ class RvNewsAdapter (var c:Context,var newsList: List<News>) : RecyclerView.Adap
 
     }
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvNewsViewHolder {
 
         return RvNewsViewHolder(LayoutInflater.from(c).inflate(R.layout.item_news,parent,false))
