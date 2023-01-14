@@ -1,8 +1,9 @@
-package ir.ahe.abbas.newstest.Modules
+package ir.ahe.abbas.newstest.Models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 
+@kotlinx.serialization.Serializable
 @Entity
 data class News(
     @ColumnInfo(name = "source")

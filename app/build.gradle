@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'kotlinx-serialization'
+
 }
 
 android {
@@ -60,8 +62,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation("io.ktor:ktor-client-core:2.2.2")
-    implementation("io.ktor:ktor-client-cio:2.2.2")
-    implementation("io.ktor:ktor-client-resources:2.2.2")
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
     implementation("androidx.room:room-runtime:2.4.3")
@@ -75,5 +75,12 @@ dependencies {
     implementation 'com.google.dagger:dagger-android-support:2.44'
     kapt 'com.google.dagger:dagger-android-processor:2.44'
     kapt 'com.google.dagger:dagger-compiler:2.44'
+    implementation "androidx.fragment:fragment-ktx:1.5.4"
+    implementation "io.ktor:ktor-client-okhttp:2.2.2"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:2.2.2"
+    implementation "io.ktor:ktor-client-content-negotiation:2.2.2"
+
+
+
 
 }

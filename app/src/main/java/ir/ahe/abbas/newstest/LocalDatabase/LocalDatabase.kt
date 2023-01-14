@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ir.ahe.abbas.newstest.Modules.News
+import dagger.Provides
+import ir.ahe.abbas.newstest.Models.News
+import javax.inject.Singleton
 
 @Database(entities = [News::class], version = 1, exportSchema = false)
 abstract class LocalDatabase :RoomDatabase(){
@@ -15,6 +17,7 @@ abstract class LocalDatabase :RoomDatabase(){
     companion object {
         @Volatile
         private var INSTANCE: LocalDatabase? = null
+
 
         fun getDatabase(c: Context): LocalDatabase {
 

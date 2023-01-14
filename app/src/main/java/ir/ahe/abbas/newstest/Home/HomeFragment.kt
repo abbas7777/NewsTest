@@ -1,13 +1,17 @@
 package ir.ahe.abbas.newstest.Home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.ahe.abbas.newstest.R
@@ -58,17 +62,28 @@ class HostFragment : Fragment() {
         val rvNews=viewBinding.rvHomeFragmentNews
         rvNews.layoutManager=LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
 
-        CoroutineScope(Dispatchers.IO).launch {
-
-            homeViewModel.getNewsLiveData("Apple","2023-01-12","popularity","79819d81c81c4b5aa23c25e99ce15029").observe(viewLifecycleOwner, Observer {
-                val rvNewsAdapter = RvNewsAdapter(requireActivity(), it)
-                rvNews.adapter = rvNewsAdapter
-
-        })
 
 
+        lifecycleScope.launch {
+
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+
+
+                homeViewModel.getNews("Apple","2023-01-12","popularity","79819d81c81c4b5aa23c25e99ce15029")
+
+                homeViewModel.news?.observe(viewLifecycleOwner, Observer {
+                    val rvNewsAdapter = RvNewsAdapter(requireActivity(), it)
+                    Log.i("ACE", "setUpViews: " + it.get(0).author)
+                    rvNews.adapter = rvNewsAdapter
+                })
+            }
 
         }
+
+
+
+
+
 
 
     }
