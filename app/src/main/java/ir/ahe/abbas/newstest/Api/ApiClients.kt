@@ -12,8 +12,8 @@ import io.ktor.http.*
 import javax.inject.Singleton
 
 
-@Module
 @InstallIn(SingletonComponent::class)
+@Module
 object ApiClients {
 
 

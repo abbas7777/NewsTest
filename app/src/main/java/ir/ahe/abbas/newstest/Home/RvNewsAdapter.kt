@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import dagger.hilt.android.qualifiers.ActivityContext
-import ir.ahe.abbas.newstest.Models.News
+import ir.ahe.abbas.newstest.Modules.News
 import ir.ahe.abbas.newstest.R
-import javax.inject.Inject
 
 class RvNewsAdapter  constructor( var c:Context, var newsList: List<News>) : RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
 
