@@ -11,7 +11,9 @@ class HomeApiDataSource @Inject constructor( private val api:ApiClients) {
 
     suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):ResponseModel{
 
-        return api.provideClient().get(getNews(q, from, sortBy, apiKey)).body()
+        val ss:ResponseModel=api.provideClient().get(getNews(q, from, sortBy, apiKey)).body()
+
+        return ss
 
     }
 }

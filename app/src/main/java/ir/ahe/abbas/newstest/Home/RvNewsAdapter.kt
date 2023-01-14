@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.qualifiers.ActivityContext
 import ir.ahe.abbas.newstest.Models.News
@@ -14,7 +16,8 @@ class RvNewsAdapter  constructor( var c:Context, var newsList: List<News>) : Rec
 
 
     inner class RvNewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        var imvImage:ImageView=itemView.findViewById(R.id.imv_itemNews_image)
+        var txtTitle:TextView=itemView.findViewById(R.id.txt_itemNews_title)
     }
 
 
@@ -27,7 +30,9 @@ class RvNewsAdapter  constructor( var c:Context, var newsList: List<News>) : Rec
     }
 
     override fun onBindViewHolder(holder: RvNewsViewHolder, position: Int) {
+        var news=newsList.get(position)
 
+        holder.txtTitle.text=news.title
     }
 
     override fun getItemCount(): Int {
