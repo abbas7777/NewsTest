@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ir.ahe.abbas.newstest.Models.News
 import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
 import kotlinx.coroutines.*
@@ -73,8 +77,14 @@ class HostFragment : Fragment() {
 
 
                 homeViewModel.news?.observe(viewLifecycleOwner, Observer {
-                    val rvNewsAdapter = RvNewsAdapter(requireActivity(), it)
-                    Log.i("ACE", "setUpViews: " + it.get(0).author)
+                    val rvNewsAdapter = RvNewsAdapter(requireActivity(), it, object :RvNewsAdapter.OnNewsClickListner{
+                        override fun onClick(item: News) {
+                            val bundle= bundleOf("newsmodel" to News)
+                            viewBinding.root.findNavController().navigate(R.id.action_bnav_home_to_detailFragment,bundle)
+                        }
+
+                    })
+                    //Log.i("ACE", "setUpViews: " + it.get(0).author)
                     rvNews.adapter = rvNewsAdapter
                 })
             }

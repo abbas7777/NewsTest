@@ -10,10 +10,26 @@
         android:id="@+id/bnav_home"
         android:name="ir.ahe.abbas.newstest.Home.HostFragment"
         android:label="fragment_host"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_bnav_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bnav_cat"
         android:name="ir.ahe.abbas.newstest.Cat.CatFragment"
         android:label="fragment_cat"
         tools:layout="@layout/fragment_cat" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="ir.ahe.abbas.newstest.Detail.DetailFragment"
+        android:label="DetailFragment">
+        <action
+            android:id="@+id/action_detailFragment_to_bnav_home"
+            app:destination="@id/bnav_home" />
+
+        <argument
+            android:defaultValue="false"
+            android:name="ir.ahe.abbas.newstest.Models.News"/>
+    </fragment>
 </navigation>
