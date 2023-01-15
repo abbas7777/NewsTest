@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ir.ahe.abbas.newstest.Models.News
 import ir.ahe.abbas.newstest.R
 
@@ -30,6 +31,7 @@ class RvNewsAdapter  constructor( var c:Context, var newsList: List<News>) : Rec
     override fun onBindViewHolder(holder: RvNewsViewHolder, position: Int) {
         var news=newsList.get(position)
 
+        Picasso.get().load(news.urlToImage).resize(500,500).into(holder.imvImage)
         holder.txtTitle.text=news.title
     }
 

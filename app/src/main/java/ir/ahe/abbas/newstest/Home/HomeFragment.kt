@@ -71,6 +71,7 @@ class HostFragment : Fragment() {
 
                 homeViewModel.getNews("Apple","2023-01-12","popularity","79819d81c81c4b5aa23c25e99ce15029")
 
+
                 homeViewModel.news?.observe(viewLifecycleOwner, Observer {
                     val rvNewsAdapter = RvNewsAdapter(requireActivity(), it)
                     Log.i("ACE", "setUpViews: " + it.get(0).author)
