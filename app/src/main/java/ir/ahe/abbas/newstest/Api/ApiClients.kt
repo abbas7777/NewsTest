@@ -22,6 +22,8 @@ object ApiClients {
     @Singleton
     fun provideClient()= HttpClient(OkHttp){
 
+
+
         install(ContentNegotiation) {
             json()
         }

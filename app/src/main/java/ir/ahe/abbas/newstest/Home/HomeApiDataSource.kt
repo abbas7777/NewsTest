@@ -1,5 +1,6 @@
 package ir.ahe.abbas.newstest.Home
 
+import android.util.Log
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -9,16 +10,19 @@ import javax.inject.Inject
 class HomeApiDataSource @Inject constructor( private val api:HttpClient) {
 
     suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):ResponseModel{
-
-        return api.get("/everything") {
+       val res= api.get("/everything") {
             url {
                 parameter("q",q)
                 parameter("from",from)
                 parameter("sortBy",sortBy)
                 parameter("apiKey",apiKey)
             }
-        }.body()
+        }
 
+        val s=res.body<String>()
+
+        Log.e("ACE", "getNews: "+s )
+        return res.body()
     }
 
 }
