@@ -5,56 +5,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import ir.ahe.abbas.newstest.Models.Cat
 import ir.ahe.abbas.newstest.R
+import ir.ahe.abbas.newstest.databinding.FragmentCatBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CatFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CatFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
+    lateinit var viewBinding: FragmentCatBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cat, container, false)
+
+        viewBinding=FragmentCatBinding.inflate(inflater)
+
+        setUpViews()
+        return viewBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CatFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CatFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    private fun setUpViews() {
+        var rvCat:RecyclerView=viewBinding.rvHomeFragmentCat
+        rvCat.layoutManager=LinearLayoutManager(requireActivity(),RecyclerView.VERTICAL,false)
+
+
+        var catBBC=Cat("BBC News" , "bbc-news")
+        var catCNN=Cat("CNN News" , "cnn")
+        var catFox=Cat("FOX News" , "fox-news")
+
+        var catList=ArrayList<Cat>()
+
+        catList.add(catBBC)
+        catList.add(catCNN)
+        catList.add(catFox)
+
+        rvCat.adapter=RvCatAdapter(requireActivity(),catList,object :RvCatAdapter.OnCatClickListner{
+            override fun onClick(value: String) {
+
+                viewBinding.root.findNavController().navigate(CatFragmentDirections.actionBnavCatToNewsFragment(value))
             }
+        })
+
     }
+
 }

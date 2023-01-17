@@ -19,17 +19,30 @@
         android:id="@+id/bnav_cat"
         android:name="ir.ahe.abbas.newstest.Cat.CatFragment"
         android:label="fragment_cat"
-        tools:layout="@layout/fragment_cat" />
+        tools:layout="@layout/fragment_cat" >
+        <action
+            android:id="@+id/action_bnav_cat_to_newsFragment"
+            app:destination="@id/newsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="ir.ahe.abbas.newstest.Detail.DetailFragment"
         android:label="DetailFragment">
-        <action
-            android:id="@+id/action_detailFragment_to_bnav_home"
-            app:destination="@id/bnav_home" />
 
         <argument
-            android:defaultValue="false"
-            android:name="ir.ahe.abbas.newstest.Models.News"/>
+            app:argType="ir.ahe.abbas.newstest.Models.News"
+            android:name="news"/>
+    </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="ir.ahe.abbas.newstest.Cat.News.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" >
+        <argument
+            app:argType="string"
+            android:name="newstype"/>
+        <action
+            android:id="@+id/action_newsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

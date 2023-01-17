@@ -16,11 +16,10 @@ class HomeRepository @Inject constructor( private var homeApiDataSource: HomeApi
     suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):Flow<List<News>>{
 
         val response:ResponseModel=homeApiDataSource.getNews(q, from, sortBy, apiKey)
-        val list:Flow<List<News>> = flow {
+
+        return flow {
             emit(response.articles )
         }
-
-        return list
     }
 
 }

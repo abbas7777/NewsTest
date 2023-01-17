@@ -12,11 +12,15 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor( private val homeRepository: HomeRepository) : ViewModel() {
 
 
-    var news: LiveData<List<News>>? =MutableLiveData()
+    private var _news: MutableLiveData<List<News>> =MutableLiveData()
+    var news: LiveData<List<News>> = _news
 
     fun getNews(q:String, from:String, sortBy :String, apiKey: String){
         viewModelScope.launch{
-            news=homeRepository.getNews(q, from, sortBy, apiKey).asLiveData()
+            homeRepository.getNews(q, from, sortBy, apiKey).collect() {
+                _news.postValue(it)
+            }
+
         }
     }
 

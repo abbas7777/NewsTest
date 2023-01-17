@@ -9,24 +9,18 @@ import ir.ahe.abbas.newstest.Models.ResponseModel
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
-class HomeApiDataSource @Inject constructor( private val api:HttpClient) {
+class HomeApiDataSource @Inject constructor(private val api: HttpClient) {
 
-    suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):ResponseModel{
-      var ressponse=  api.get("/everything") {
+    suspend fun getNews(q: String, from: String, sortBy: String, apiKey: String): ResponseModel {
+        return api.get("/everything") {
             url {
-                parameter("q",q)
-                parameter("from",from)
-                parameter("sortBy",sortBy)
-                parameter("apiKey",apiKey)
+                parameter("q", q)
+                parameter("from", from)
+                parameter("sortBy", sortBy)
+                parameter("apiKey", apiKey)
             }
-        }
+        }.body()
 
-
-        var js=Json.encodeToString(ResponseModel.serializer(),ressponse.body())
-
-        Log.e("ACE", "getNews: "+ js )
-
-        return ressponse.body()
     }
 
 }

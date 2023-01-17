@@ -1,8 +1,11 @@
 package ir.ahe.abbas.newstest.Models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Parcelize
 @Serializable
 data class News(
     @SerialName("source")
@@ -28,4 +31,4 @@ data class News(
 
     @SerialName("content")
     var content: String?
-)
+) : Parcelable
