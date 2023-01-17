@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -51,11 +52,15 @@ class HostFragment : Fragment() {
 
         homeViewModel.getNews("Apple","2023-01-12","popularity","79819d81c81c4b5aa23c25e99ce15029")
 
+
     }
 
 
     private fun getNews() {
         homeViewModel.news.observe(viewLifecycleOwner, Observer {
+            if (it.size==0){
+                Toast.makeText(requireActivity(),"connection error !",Toast.LENGTH_SHORT).show()
+            }
             val rvNewsAdapter = RvNewsAdapter(requireActivity(), it, object :RvNewsAdapter.OnNewsClickListner{
                 override fun onClick(item: News) {
 

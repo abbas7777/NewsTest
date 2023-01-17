@@ -31,7 +31,7 @@ class RvNewsAdapter constructor(var c: Context, var newsList: List<News>, var on
     override fun onBindViewHolder(holder: RvNewsViewHolder, position: Int) {
         var news = newsList.get(position)
 
-        Picasso.get().load(news.urlToImage).resize(500, 500).into(holder.imvImage)
+        Picasso.get().load(news.urlToImage).placeholder(R.drawable.newspaper).resize(500, 500).into(holder.imvImage)
         holder.txtTitle.text = news.title
 
         holder.rlParent.setOnClickListener({

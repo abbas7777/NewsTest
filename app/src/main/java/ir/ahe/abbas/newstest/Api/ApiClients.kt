@@ -1,5 +1,6 @@
 package ir.ahe.abbas.newstest.Api
 
+import android.util.Log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,13 +40,8 @@ object ApiClients {
             url { protocol = URLProtocol.HTTPS }
         }
 
-      /*  install(Logging) {
-            logger = Logger.DEFAULT
-            level = LogLevel.HEADERS
-            filter { request ->
-                request.url.host.contains("ktor.io")
-            }
+        install(Logging){
         }
-*/
+
     }
 }

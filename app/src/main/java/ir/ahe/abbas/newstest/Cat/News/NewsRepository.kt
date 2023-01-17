@@ -11,10 +11,16 @@ class NewsRepository @Inject constructor(private val newsApiDataSource: NewsApiD
 
 
     suspend fun getCatNews(sources:String, apiKey :String ):Flow<List<News>> {
-        val responseModel :ResponseModel=newsApiDataSource.getCatNews(sources, apiKey).body()
+        var list:List<News> = ArrayList<News>()
+        try {
+            val responseModel :ResponseModel=newsApiDataSource.getCatNews(sources, apiKey).body()
+            list=responseModel.articles
+        }catch (e:Throwable){
+            e.printStackTrace()
+        }
 
         return flow {
-            emit(responseModel.articles)
+            emit(list)
         }
 
     }

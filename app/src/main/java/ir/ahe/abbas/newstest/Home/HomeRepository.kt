@@ -13,12 +13,18 @@ import javax.inject.Inject
 class HomeRepository @Inject constructor( private var homeApiDataSource: HomeApiDataSource) {
 
 
+
     suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):Flow<List<News>>{
 
-        val response:ResponseModel=homeApiDataSource.getNews(q, from, sortBy, apiKey)
-
+        var list:List<News> =ArrayList<News>()
+        try {
+            val response=homeApiDataSource.getNews(q, from, sortBy, apiKey)
+            list=response.articles
+        }catch (e:Throwable){
+            e.printStackTrace()
+        }
         return flow {
-            emit(response.articles )
+            emit(list)
         }
     }
 
