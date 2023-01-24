@@ -12,7 +12,11 @@ import com.squareup.picasso.Picasso
 import ir.ahe.abbas.newstest.models.News
 import ir.ahe.abbas.newstest.R
 
-class RvNewsAdapter constructor(var c: Context, var newsList: List<News>, var onNewsClickListner: OnNewsClickListner) :
+class RvNewsAdapter constructor(
+    private val context: Context,
+    private val newsList: List<News>,
+    private val onNewsClickListener: OnNewsClickListener
+) :
     RecyclerView.Adapter<RvNewsAdapter.RvNewsViewHolder>() {
 
 
@@ -25,25 +29,33 @@ class RvNewsAdapter constructor(var c: Context, var newsList: List<News>, var on
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvNewsViewHolder {
 
-        return RvNewsViewHolder(LayoutInflater.from(c).inflate(R.layout.item_news, parent, false))
+        return RvNewsViewHolder(
+            LayoutInflater.from(context).inflate(R.layout.item_news, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: RvNewsViewHolder, position: Int) {
-        var news = newsList.get(position)
+        val news = newsList[position]
 
-        Picasso.get().load(news.urlToImage).placeholder(R.drawable.newspaper).resize(500, 500).into(holder.imvImage)
+        Picasso
+            .get()
+            .load(news.urlToImage)
+            .placeholder(R.drawable.newspaper)
+            .resize(500, 500)
+            .into(holder.imvImage)
+
         holder.txtTitle.text = news.title
 
-        holder.rlParent.setOnClickListener({
-            onNewsClickListner.onClick(news)
-        })
+        holder.rlParent.setOnClickListener {
+            onNewsClickListener.onClick(news)
+        }
     }
 
     override fun getItemCount(): Int {
         return newsList.size
     }
 
-    interface OnNewsClickListner {
-        fun onClick(item:News)
+    interface OnNewsClickListener {
+        fun onClick(item: News)
     }
 }
