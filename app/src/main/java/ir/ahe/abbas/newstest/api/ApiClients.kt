@@ -26,8 +26,6 @@ object ApiClients {
     @Singleton
     fun provideClient()= HttpClient(OkHttp){
 
-
-
         install(ContentNegotiation) {
             json()
         }
@@ -36,8 +34,6 @@ object ApiClients {
             url { protocol = URLProtocol.HTTPS }
         }
 
-        install(Logging){
-        }
-
+        install(Logging)
     }
 }
