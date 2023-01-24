@@ -17,16 +17,16 @@ import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
 @AndroidEntryPoint
 class HostFragment : Fragment() {
 
-    lateinit var viewBinding: FragmentHomeBinding
-    lateinit var rvNews:RecyclerView
-    val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var viewBinding: FragmentHomeBinding
+    private lateinit var rvNews: RecyclerView
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        viewBinding=FragmentHomeBinding.inflate(inflater)
+        viewBinding = FragmentHomeBinding.inflate(inflater)
 
         setUpViews()
         getNews()
@@ -34,11 +34,17 @@ class HostFragment : Fragment() {
     }
 
     private fun setUpViews() {
-         rvNews=viewBinding.rvHomeFragmentNews
-        rvNews.layoutManager=LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
+        rvNews = viewBinding.rvHomeFragmentNews
+        rvNews.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
 
-        homeViewModel.getNews("Apple","2023-01-12","popularity","79819d81c81c4b5aa23c25e99ce15029")
+        homeViewModel.getNews(
+            "Apple",
+            "2023-01-12",
+            "popularity",
+            "79819d81c81c4b5aa23c25e99ce15029"
+        )
 
 
     }
@@ -46,11 +52,13 @@ class HostFragment : Fragment() {
 
     private fun getNews() {
         homeViewModel.news.observe(viewLifecycleOwner) {
-            if (it==null) {
-                Toast.makeText(requireActivity(), "connection error !", Toast.LENGTH_SHORT).show()
+
+            if (it == null) {
+                Toast.makeText(requireActivity(), "connection error !", Toast.LENGTH_SHORT)
+                    .show()
             }
             val rvNewsAdapter =
-                RvNewsAdapter(requireActivity(), it, object : RvNewsAdapter.OnNewsClickListner {
+                RvNewsAdapter(requireActivity(), it, object : RvNewsAdapter.OnNewsClickListener {
                     override fun onClick(item: News) {
 
                         Navigation.findNavController(viewBinding.root)
