@@ -13,6 +13,6 @@ data class ResponseModel(
     var totalResults: Int,
 
     @SerialName("articles")
-    var articles: List<News>
+    var articles: List<News>?
 
     )

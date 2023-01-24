@@ -47,17 +47,19 @@ class NewsFragment : Fragment() {
     private fun getNewsCat() {
 
 
-        newwViewModel.news.observe(viewLifecycleOwner,{
+        newwViewModel.news.observe(viewLifecycleOwner) {
 
-            if (it.size==0){
-                Toast.makeText(requireActivity(),"connection error !", Toast.LENGTH_SHORT).show()
+            if (it==null) {
+                Toast.makeText(requireActivity(), "connection error !", Toast.LENGTH_SHORT).show()
             }
-            rvNews.adapter=RvNewsAdapter(requireActivity(),it,object :RvNewsAdapter.OnNewsClickListner{
-                override fun onClick(item: News) {
-                    Navigation.findNavController(viewBinding.root).navigate(NewsFragmentDirections.actionNewsFragmentToDetailFragment(item))
+            rvNews.adapter =
+                RvNewsAdapter(requireActivity(), it, object : RvNewsAdapter.OnNewsClickListner {
+                    override fun onClick(item: News) {
+                        Navigation.findNavController(viewBinding.root)
+                            .navigate(NewsFragmentDirections.actionNewsFragmentToDetailFragment(item))
 
-                }
-            })
-        })
+                    }
+                })
+        }
     }
 }
