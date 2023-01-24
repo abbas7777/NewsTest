@@ -15,34 +15,34 @@ import ir.ahe.abbas.newstest.databinding.FragmentCatBinding
 class CatFragment : Fragment() {
 
 
-    lateinit var viewBinding: FragmentCatBinding
+    private lateinit var viewBinding: FragmentCatBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewBinding=FragmentCatBinding.inflate(inflater)
-
         setUpViews()
+
         return viewBinding.root
     }
 
     private fun setUpViews() {
-        var rvCat:RecyclerView=viewBinding.rvHomeFragmentCat
+        val rvCat:RecyclerView=viewBinding.rvHomeFragmentCat
         rvCat.layoutManager=LinearLayoutManager(requireActivity(),RecyclerView.VERTICAL,false)
 
+        val catBBC=Cat("BBC News" , "bbc-news")
+        val catCNN=Cat("CNN News" , "cnn")
+        val catFox=Cat("FOX News" , "fox-news")
 
-        var catBBC=Cat("BBC News" , "bbc-news")
-        var catCNN=Cat("CNN News" , "cnn")
-        var catFox=Cat("FOX News" , "fox-news")
-
-        var catList=ArrayList<Cat>()
+        val catList=ArrayList<Cat>()
 
         catList.add(catBBC)
         catList.add(catCNN)
         catList.add(catFox)
 
-        rvCat.adapter=RvCatAdapter(requireActivity(),catList,object :RvCatAdapter.OnCatClickListner{
+        rvCat.adapter=RvCatAdapter(requireActivity(),catList,object :RvCatAdapter.OnCatClickListener{
             override fun onClick(value: String) {
 
                 viewBinding.root.findNavController().navigate(CatFragmentDirections.actionBnavCatToNewsFragment(value))
@@ -50,5 +50,4 @@ class CatFragment : Fragment() {
         })
 
     }
-
 }
