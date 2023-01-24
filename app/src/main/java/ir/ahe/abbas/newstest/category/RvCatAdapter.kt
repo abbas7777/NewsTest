@@ -10,7 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.ahe.abbas.newstest.models.Cat
 import ir.ahe.abbas.newstest.R
 
-class RvCatAdapter (private val context: Context, private val list: List<Cat>, private val onCatClickListener: OnCatClickListener) : RecyclerView.Adapter<RvCatAdapter.RvCatViewHolder>() {
+class RvCatAdapter (
+    private val context: Context,
+    private val list: List<Cat>,
+    private val onCatClickListener: OnCatClickListener
+    ) : RecyclerView.Adapter<RvCatAdapter.RvCatViewHolder>() {
 
     inner class RvCatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var parent:RelativeLayout=itemView.findViewById(R.id.rl_itemCat_parent)
@@ -19,7 +23,8 @@ class RvCatAdapter (private val context: Context, private val list: List<Cat>, p
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvCatViewHolder {
 
-        return RvCatViewHolder(LayoutInflater.from(context).inflate(R.layout.item_cat,parent,false))
+        val view = LayoutInflater.from(context).inflate(R.layout.item_cat,parent,false)
+        return RvCatViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RvCatViewHolder, position: Int) {
