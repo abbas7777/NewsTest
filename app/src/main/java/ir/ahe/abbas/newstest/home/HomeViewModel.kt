@@ -9,7 +9,6 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor( private val homeRepository: HomeRepository) : ViewModel() {
 
-
     private var _news: MutableLiveData<List<News>> =MutableLiveData()
     var news: LiveData<List<News>> = _news
 
