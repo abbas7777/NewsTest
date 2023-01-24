@@ -19,10 +19,10 @@ import ir.ahe.abbas.newstest.databinding.FragmentNewsBinding
 @AndroidEntryPoint
 class NewsFragment : Fragment() {
 
-    lateinit var viewBinding: FragmentNewsBinding
-    lateinit var newsType:String
-    lateinit var rvNews:RecyclerView
-    val newwViewModel: NewsViewModel by viewModels()
+    private lateinit var viewBinding: FragmentNewsBinding
+    private lateinit var newsType: String
+    private lateinit var rvNews: RecyclerView
+    private val newsViewModel: NewsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,24 +36,27 @@ class NewsFragment : Fragment() {
     }
 
     private fun setUpViews() {
-        newsType=NewsFragmentArgs.fromBundle(requireArguments()).newstype
-         rvNews= viewBinding.rvNewsFragmentList
+
+        newsType = NewsFragmentArgs.fromBundle(requireArguments()).newstype
+        rvNews = viewBinding.rvNewsFragmentList
+
         rvNews.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-        newwViewModel.getCatNews(newsType,"79819d81c81c4b5aa23c25e99ce15029")
+
+        newsViewModel.getCatNews(newsType, "79819d81c81c4b5aa23c25e99ce15029")
 
     }
 
     private fun getNewsCat() {
 
+        newsViewModel.news.observe(viewLifecycleOwner) {
 
-        newwViewModel.news.observe(viewLifecycleOwner) {
-
-            if (it==null) {
-                Toast.makeText(requireActivity(), "connection error !", Toast.LENGTH_SHORT).show()
+            if (it == null) {
+                Toast.makeText(requireActivity(), "connection error !", Toast.LENGTH_SHORT)
+                    .show()
             }
             rvNews.adapter =
-                RvNewsAdapter(requireActivity(), it, object : RvNewsAdapter.OnNewsClickListner {
+                RvNewsAdapter(requireActivity(), it, object : RvNewsAdapter.OnNewsClickListener {
                     override fun onClick(item: News) {
                         Navigation.findNavController(viewBinding.root)
                             .navigate(NewsFragmentDirections.actionNewsFragmentToDetailFragment(item))

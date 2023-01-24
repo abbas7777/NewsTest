@@ -22,32 +22,35 @@ class CatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewBinding=FragmentCatBinding.inflate(inflater)
+        viewBinding = FragmentCatBinding.inflate(inflater)
         setUpViews()
 
         return viewBinding.root
     }
 
     private fun setUpViews() {
-        val rvCat:RecyclerView=viewBinding.rvHomeFragmentCat
-        rvCat.layoutManager=LinearLayoutManager(requireActivity(),RecyclerView.VERTICAL,false)
+        val rvCat: RecyclerView = viewBinding.rvHomeFragmentCat
+        rvCat.layoutManager =
+            LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
 
-        val catBBC=Cat("BBC News" , "bbc-news")
-        val catCNN=Cat("CNN News" , "cnn")
-        val catFox=Cat("FOX News" , "fox-news")
+        val catBBC = Cat("BBC News", "bbc-news")
+        val catCNN = Cat("CNN News", "cnn")
+        val catFox = Cat("FOX News", "fox-news")
 
-        val catList=ArrayList<Cat>()
+        val catList = ArrayList<Cat>()
 
         catList.add(catBBC)
         catList.add(catCNN)
         catList.add(catFox)
 
-        rvCat.adapter=RvCatAdapter(requireActivity(),catList,object :RvCatAdapter.OnCatClickListener{
-            override fun onClick(value: String) {
+        rvCat.adapter =
+            RvCatAdapter(requireActivity(), catList, object : RvCatAdapter.OnCatClickListener {
+                override fun onClick(value: String) {
 
-                viewBinding.root.findNavController().navigate(CatFragmentDirections.actionBnavCatToNewsFragment(value))
-            }
-        })
+                    viewBinding.root.findNavController()
+                        .navigate(CatFragmentDirections.actionBnavCatToNewsFragment(value))
+                }
+            })
 
     }
 }
