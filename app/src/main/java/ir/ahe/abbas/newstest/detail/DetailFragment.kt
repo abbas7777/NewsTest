@@ -14,15 +14,13 @@ import ir.ahe.abbas.newstest.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
 
+   private lateinit var viewBinding: FragmentDetailBinding
+   private lateinit var news: News
 
-
-
-    lateinit var viewBinding: FragmentDetailBinding
-    lateinit var news: News
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         viewBinding = FragmentDetailBinding.inflate(inflater)
         news= DetailFragmentArgs.fromBundle(requireArguments()).news
         setUpViews()
