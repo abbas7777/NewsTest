@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,21 +45,23 @@ class HostFragment : Fragment() {
 
 
     private fun getNews() {
-        homeViewModel.news.observe(viewLifecycleOwner, Observer {
-            if (it.size==0){
-                Toast.makeText(requireActivity(),"connection error !",Toast.LENGTH_SHORT).show()
+        homeViewModel.news.observe(viewLifecycleOwner) {
+            if (it==null) {
+                Toast.makeText(requireActivity(), "connection error !", Toast.LENGTH_SHORT).show()
             }
-            val rvNewsAdapter = RvNewsAdapter(requireActivity(), it, object :RvNewsAdapter.OnNewsClickListner{
-                override fun onClick(item: News) {
+            val rvNewsAdapter =
+                RvNewsAdapter(requireActivity(), it, object : RvNewsAdapter.OnNewsClickListner {
+                    override fun onClick(item: News) {
 
-                    Navigation.findNavController(viewBinding.root).navigate(HostFragmentDirections.actionBnavHomeToDetailFragment(item))
+                        Navigation.findNavController(viewBinding.root)
+                            .navigate(HostFragmentDirections.actionBnavHomeToDetailFragment(item))
 
-                }
+                    }
 
-            })
+                })
             //Log.i("ACE", "setUpViews: " + it.get(0).author)
             rvNews.adapter = rvNewsAdapter
-        })
+        }
     }
 
 }

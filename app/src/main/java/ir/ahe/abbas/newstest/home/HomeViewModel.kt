@@ -15,7 +15,7 @@ class HomeViewModel @Inject constructor( private val homeRepository: HomeReposit
 
     fun getNews(q:String, from:String, sortBy :String, apiKey: String){
         viewModelScope.launch{
-            homeRepository.getNews(q, from, sortBy, apiKey).collect() {
+            homeRepository.getNews(q, from, sortBy, apiKey).collect {
                 _news.postValue(it)
             }
 

@@ -18,9 +18,9 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
      fun getCatNews(sources: String, apiKey: String) {
 
         viewModelScope.launch {
-            newsRepository.getCatNews(sources, apiKey).collect({
+            newsRepository.getCatNews(sources, apiKey).collect {
                 _news.postValue(it)
-            })
+            }
 
         }
     }

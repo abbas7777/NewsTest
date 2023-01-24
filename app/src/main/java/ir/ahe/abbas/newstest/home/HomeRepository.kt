@@ -11,15 +11,8 @@ class HomeRepository @Inject constructor( private var homeApiDataSource: HomeApi
 
     suspend fun getNews(q:String, from:String, sortBy :String, apiKey: String):Flow<List<News>>{
 
-        var list:List<News> =ArrayList<News>()
-        try {
-            val response=homeApiDataSource.getNews(q, from, sortBy, apiKey)
-            list=response.articles
-        }catch (e:Throwable){
-            e.printStackTrace()
-        }
         return flow {
-            emit(list)
+            homeApiDataSource.getNews(q, from, sortBy, apiKey).articles?.let { emit(it) }
         }
     }
 
