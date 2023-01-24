@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Cat
+package ir.ahe.abbas.newstest.category
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ir.ahe.abbas.newstest.Models.Cat
-import ir.ahe.abbas.newstest.R
+import ir.ahe.abbas.newstest.models.Cat
 import ir.ahe.abbas.newstest.databinding.FragmentCatBinding
 
 

@@ -1,12 +1,9 @@
-package ir.ahe.abbas.newstest.Home
+package ir.ahe.abbas.newstest.home
 
-import android.util.Log
-import com.google.gson.Gson
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import ir.ahe.abbas.newstest.Models.ResponseModel
-import kotlinx.serialization.json.Json
+import ir.ahe.abbas.newstest.models.ResponseModel
 import javax.inject.Inject
 
 class HomeApiDataSource @Inject constructor(private val api: HttpClient) {

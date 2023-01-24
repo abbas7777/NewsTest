@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Cat.News
+package ir.ahe.abbas.newstest.category.news
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import ir.ahe.abbas.newstest.Home.HostFragmentDirections
-import ir.ahe.abbas.newstest.Home.RvNewsAdapter
-import ir.ahe.abbas.newstest.Models.News
+import ir.ahe.abbas.newstest.home.RvNewsAdapter
+import ir.ahe.abbas.newstest.models.News
 import ir.ahe.abbas.newstest.databinding.FragmentNewsBinding
 
 

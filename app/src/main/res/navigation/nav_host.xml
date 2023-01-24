@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/bnav_home"
-        android:name="ir.ahe.abbas.newstest.Home.HostFragment"
+        android:name="ir.ahe.abbas.newstest.home.HostFragment"
         android:label="fragment_host"
         tools:layout="@layout/fragment_home">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/bnav_cat"
-        android:name="ir.ahe.abbas.newstest.Cat.CatFragment"
+        android:name="ir.ahe.abbas.newstest.category.CatFragment"
         android:label="fragment_cat"
         tools:layout="@layout/fragment_cat" >
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="ir.ahe.abbas.newstest.Detail.DetailFragment"
+        android:name="ir.ahe.abbas.newstest.detail.DetailFragment"
         android:label="DetailFragment">
 
         <argument
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
-        android:name="ir.ahe.abbas.newstest.Cat.News.NewsFragment"
+        android:name="ir.ahe.abbas.newstest.category.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
         <argument

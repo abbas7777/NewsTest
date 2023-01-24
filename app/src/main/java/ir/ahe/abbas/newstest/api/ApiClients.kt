@@ -1,6 +1,5 @@
-package ir.ahe.abbas.newstest.Api
+package ir.ahe.abbas.newstest.api
 
-import android.util.Log
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,12 +12,9 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.logging.*
-import io.ktor.util.logging.Logger
 import javax.inject.Singleton
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlinx.android.extensions.CacheImplementation.Companion.DEFAULT
-import okhttp3.CertificatePinner.Companion.DEFAULT
 
 
 @InstallIn(SingletonComponent::class)

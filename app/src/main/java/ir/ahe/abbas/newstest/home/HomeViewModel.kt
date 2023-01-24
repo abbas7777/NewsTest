@@ -1,11 +1,9 @@
-package ir.ahe.abbas.newstest.Home
+package ir.ahe.abbas.newstest.home
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ir.ahe.abbas.newstest.Models.News
+import ir.ahe.abbas.newstest.models.News
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel

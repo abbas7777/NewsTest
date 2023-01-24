@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Home
+package ir.ahe.abbas.newstest.home
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import ir.ahe.abbas.newstest.Models.News
+import ir.ahe.abbas.newstest.models.News
 import ir.ahe.abbas.newstest.R
 
 class RvNewsAdapter constructor(var c: Context, var newsList: List<News>, var onNewsClickListner: OnNewsClickListner) :

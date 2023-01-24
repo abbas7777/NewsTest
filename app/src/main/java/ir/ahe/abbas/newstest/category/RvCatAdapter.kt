@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Cat
+package ir.ahe.abbas.newstest.category
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ir.ahe.abbas.newstest.Models.Cat
+import ir.ahe.abbas.newstest.models.Cat
 import ir.ahe.abbas.newstest.R
 
 class RvCatAdapter (var context: Context,var list: List<Cat>,var onCatClickListner: OnCatClickListner) : RecyclerView.Adapter<RvCatAdapter.RvCatViewHolder>() {

@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Cat.News
+package ir.ahe.abbas.newstest.category.news
 
 import io.ktor.client.*
 import io.ktor.client.request.*

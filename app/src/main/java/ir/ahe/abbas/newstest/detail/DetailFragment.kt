@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Detail
+package ir.ahe.abbas.newstest.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import ir.ahe.abbas.newstest.Models.News
-import ir.ahe.abbas.newstest.R
+import ir.ahe.abbas.newstest.models.News
 import ir.ahe.abbas.newstest.databinding.FragmentDetailBinding
 
 

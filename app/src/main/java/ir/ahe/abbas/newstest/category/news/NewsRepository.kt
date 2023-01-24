@@ -1,8 +1,8 @@
-package ir.ahe.abbas.newstest.Cat.News
+package ir.ahe.abbas.newstest.category.news
 
 import io.ktor.client.call.*
-import ir.ahe.abbas.newstest.Models.News
-import ir.ahe.abbas.newstest.Models.ResponseModel
+import ir.ahe.abbas.newstest.models.News
+import ir.ahe.abbas.newstest.models.ResponseModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

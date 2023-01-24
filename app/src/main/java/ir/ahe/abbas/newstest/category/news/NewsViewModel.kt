@@ -1,15 +1,11 @@
-package ir.ahe.abbas.newstest.Cat.News
+package ir.ahe.abbas.newstest.category.news
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.ktor.client.call.*
-import ir.ahe.abbas.newstest.Models.News
-import ir.ahe.abbas.newstest.Models.ResponseModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import ir.ahe.abbas.newstest.models.News
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

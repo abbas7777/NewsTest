@@ -1,30 +1,19 @@
-package ir.ahe.abbas.newstest.Home
+package ir.ahe.abbas.newstest.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
-import ir.ahe.abbas.newstest.Models.News
-import ir.ahe.abbas.newstest.R
+import ir.ahe.abbas.newstest.models.News
 import ir.ahe.abbas.newstest.databinding.FragmentHomeBinding
-import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class HostFragment : Fragment() {

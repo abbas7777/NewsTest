@@ -4,9 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import dagger.Provides
-import ir.ahe.abbas.newstest.Models.News
-import javax.inject.Singleton
+import ir.ahe.abbas.newstest.models.News
 
 @Database(entities = [News::class], version = 1, exportSchema = false)
 abstract class LocalDatabase :RoomDatabase(){

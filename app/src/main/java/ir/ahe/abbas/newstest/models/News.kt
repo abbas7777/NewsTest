@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.Models
+package ir.ahe.abbas.newstest.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
