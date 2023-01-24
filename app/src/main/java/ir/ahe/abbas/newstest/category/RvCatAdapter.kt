@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.ahe.abbas.newstest.models.Cat
 import ir.ahe.abbas.newstest.R
 
-class RvCatAdapter (var context: Context,var list: List<Cat>,var onCatClickListner: OnCatClickListner) : RecyclerView.Adapter<RvCatAdapter.RvCatViewHolder>() {
+class RvCatAdapter (private val context: Context, private val list: List<Cat>, private val onCatClickListener: OnCatClickListener) : RecyclerView.Adapter<RvCatAdapter.RvCatViewHolder>() {
 
     inner class RvCatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var parent:RelativeLayout=itemView.findViewById(R.id.rl_itemCat_parent)
@@ -23,13 +23,13 @@ class RvCatAdapter (var context: Context,var list: List<Cat>,var onCatClickListn
     }
 
     override fun onBindViewHolder(holder: RvCatViewHolder, position: Int) {
-        var  cat=list.get(position)
+        val cat = list[position]
 
         holder.txtTitle.text=cat.title
 
-        holder.parent.setOnClickListener({
-            onCatClickListner.onClick(cat.value)
-        })
+        holder.parent.setOnClickListener {
+            onCatClickListener.onClick(cat.value)
+        }
 
     }
 
@@ -37,7 +37,7 @@ class RvCatAdapter (var context: Context,var list: List<Cat>,var onCatClickListn
         return list.size
     }
 
-    interface OnCatClickListner{
+    interface OnCatClickListener{
         fun onClick(value :String)
     }
 }
