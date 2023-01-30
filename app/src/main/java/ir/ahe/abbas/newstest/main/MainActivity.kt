@@ -4,19 +4,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ir.ahe.abbas.newstest.home.HomeViewModel
+import ir.ahe.abbas.newstest.models.News
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -34,7 +42,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun AppScreen() {
 
-        val itemList= mutableListOf(
+        val itemList = mutableListOf(
             ScreenItem.Home,
             ScreenItem.Category
         )
@@ -93,6 +101,22 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    @Composable
+    private fun HomePage(navController: NavController) {
+
+        val homeViewModel: HomeViewModel by viewModels()
+
+        homeViewModel.getNews(
+            "Apple",
+            "2023-01-12",
+            "popularity",
+            "79819d81c81c4b5aa23c25e99ce15029"
+        )
+
+
+    }
+
 
     @Preview
     @Composable
