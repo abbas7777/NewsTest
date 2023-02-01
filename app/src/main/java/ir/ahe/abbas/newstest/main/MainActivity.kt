@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -116,9 +116,11 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun HomePage(modifier: Modifier, navController: NavController) {
-
-        val homeViewModel: HomeViewModel by viewModels()
+    private fun HomePage(
+        modifier: Modifier,
+        navController: NavController,
+        homeViewModel: HomeViewModel = hiltViewModel()
+    ) {
 
         val newsList by homeViewModel.news.collectAsState()
         ItemList(modifier, newsList)
@@ -134,7 +136,6 @@ class MainActivity : ComponentActivity() {
 
             items(items = newsList, itemContent = { news ->
                 NewsItem(item = news, modifier = modifier)
-
             })
 
 
