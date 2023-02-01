@@ -5,17 +5,18 @@ import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -23,6 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import ir.ahe.abbas.newstest.home.HomeViewModel
 import ir.ahe.abbas.newstest.models.News
 
@@ -40,19 +42,20 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun AppScreen() {
+    private fun AppScreen(modifier: Modifier = Modifier) {
 
         val itemList = mutableListOf(
             ScreenItem.Home,
             ScreenItem.Category
         )
 
-        BottomNavigation(itemList = itemList)
+        BottomNavigation(itemList = itemList, modifier = modifier)
 
     }
 
     @Composable
     private fun BottomNavigation(
+        modifier: Modifier,
         itemList: MutableList<ScreenItem>
     ) {
 
@@ -97,26 +100,63 @@ class MainActivity : ComponentActivity() {
                 navController, startDestination = ScreenItem.Home.route,
                 Modifier.padding(innerPadding)
             ) {
-               // composable()
+                composable(ScreenItem.Home.route) {
+                    HomePage(
+                        modifier,
+                        navController = navController
+                    )
+                }
             }
         }
     }
 
     @Composable
-    private fun HomePage(navController: NavController) {
+    private fun HomePage(modifier: Modifier, navController: NavController) {
 
-        val homeViewModel: HomeViewModel by viewModels()
+        val homeViewModel:HomeViewModel by viewModels()
 
-        homeViewModel.getNews(
-            "Apple",
-            "2023-01-12",
-            "popularity",
-            "79819d81c81c4b5aa23c25e99ce15029"
-        )
-
+        val newsList by homeViewModel.news.collectAsState()
+        ItemList(modifier, newsList)
 
     }
 
+    @Composable
+    private fun ItemList(modifier: Modifier, newsList: List<News>) {
+
+        LazyColumn {
+
+            items(items = newsList, itemContent = {news ->
+                NewsItem(item = news, modifier = modifier)
+
+            })
+
+
+        }
+    }
+
+    @Composable
+    private fun NewsItem(item: News, modifier: Modifier) {
+        Box(
+            modifier
+                .heightIn(40.dp)
+                .width(IntrinsicSize.Max)
+        ) {
+            Row {
+                Card(
+                    modifier
+                        .height(50.dp)
+                        .width(50.dp),
+                ) {
+                    AsyncImage(
+                        model = item.urlToImage,
+                        contentDescription = null
+                    )
+                }
+
+                item.title?.let { Text(text = it) }
+            }
+        }
+    }
 
     @Preview
     @Composable
