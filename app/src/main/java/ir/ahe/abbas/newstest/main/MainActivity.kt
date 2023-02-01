@@ -7,13 +7,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,7 +25,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -106,10 +108,7 @@ class MainActivity : ComponentActivity() {
                 Modifier.padding(innerPadding)
             ) {
                 composable(ScreenItem.Home.route) {
-                    HomePage(
-                        modifier,
-                        navController = navController
-                    )
+                    HomePage(modifier)
                 }
             }
         }
@@ -118,7 +117,6 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun HomePage(
         modifier: Modifier,
-        navController: NavController,
         homeViewModel: HomeViewModel = hiltViewModel()
     ) {
 
@@ -137,7 +135,6 @@ class MainActivity : ComponentActivity() {
             items(items = newsList, itemContent = { news ->
                 NewsItem(item = news, modifier = modifier)
             })
-
 
         }
     }
@@ -175,6 +172,73 @@ class MainActivity : ComponentActivity() {
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+            }
+        }
+    }
+
+    @Composable
+    private fun DetailPage(modifier: Modifier, newsModel: News) {
+
+        val scrollState = rememberScrollState()
+
+        Column(
+            modifier = modifier.verticalScroll(scrollState),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+
+            Card(
+                modifier = modifier
+                    .width(IntrinsicSize.Max)
+                    .height(200.dp),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                AsyncImage(
+                    model = newsModel.urlToImage,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            Card(
+                modifier = modifier
+                    .width(IntrinsicSize.Max)
+                    .wrapContentHeight(),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text(
+                    color = Color.Gray,
+                    text = newsModel.title!!,
+                    textAlign = TextAlign.Left
+                )
+
+                Divider(
+                    color = Color.Gray,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(1.dp)
+                )
+
+                Text(
+                    color = Color.Gray,
+                    text = newsModel.content!!,
+                    textAlign = TextAlign.Left
+                )
+
+                Divider(
+                    color = Color.Gray,
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(1.dp)
+                )
+
+                Text(
+                    color = Color.Gray,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    text = newsModel.publishedAt!!,
+                    textAlign = TextAlign.Left
+                )
+
+
             }
         }
     }
