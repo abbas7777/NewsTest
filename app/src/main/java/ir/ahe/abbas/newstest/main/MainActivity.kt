@@ -8,13 +8,18 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -113,7 +118,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun HomePage(modifier: Modifier, navController: NavController) {
 
-        val homeViewModel:HomeViewModel by viewModels()
+        val homeViewModel: HomeViewModel by viewModels()
 
         val newsList by homeViewModel.news.collectAsState()
         ItemList(modifier, newsList)
@@ -123,9 +128,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun ItemList(modifier: Modifier, newsList: List<News>) {
 
-        LazyColumn {
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
 
-            items(items = newsList, itemContent = {news ->
+            items(items = newsList, itemContent = { news ->
                 NewsItem(item = news, modifier = modifier)
 
             })
@@ -138,22 +145,35 @@ class MainActivity : ComponentActivity() {
     private fun NewsItem(item: News, modifier: Modifier) {
         Box(
             modifier
-                .heightIn(40.dp)
+                .height(80.dp)
                 .width(IntrinsicSize.Max)
         ) {
             Row {
+
+                Spacer(modifier.width(12.dp))
+
                 Card(
                     modifier
-                        .height(50.dp)
-                        .width(50.dp),
+                        .height(80.dp)
+                        .width(80.dp),
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     AsyncImage(
                         model = item.urlToImage,
-                        contentDescription = null
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
                     )
                 }
 
-                item.title?.let { Text(text = it) }
+                Spacer(modifier.width(12.dp))
+
+                Text(
+                    text = item.title!!,
+                    textAlign = TextAlign.Left,
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
             }
         }
     }
