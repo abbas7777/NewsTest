@@ -1,6 +1,7 @@
 package ir.ahe.abbas.newstest.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
@@ -34,7 +35,6 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import ir.ahe.abbas.newstest.home.HomeViewModel
 import ir.ahe.abbas.newstest.models.News
-import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -228,12 +228,13 @@ class MainActivity : ComponentActivity() {
 
             Card(
                 modifier = modifier
-                    .width(IntrinsicSize.Max)
+                    .fillMaxWidth()
                     .height(200.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
+                Log.i("ACE", "DetailPage: " + newsModel.urlToImage)
                 AsyncImage(
-                    model = URLDecoder.decode(newsModel.urlToImage,StandardCharsets.UTF_8.toString()),
+                    model = newsModel.urlToImage,
                     contentDescription = null,
                     contentScale = ContentScale.Crop
                 )
