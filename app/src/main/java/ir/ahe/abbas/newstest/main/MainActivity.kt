@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -33,6 +34,9 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import ir.ahe.abbas.newstest.home.HomeViewModel
 import ir.ahe.abbas.newstest.models.News
+import java.net.URLDecoder
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -107,7 +111,24 @@ class MainActivity : ComponentActivity() {
                 Modifier.padding(innerPadding)
             ) {
                 composable(ScreenItem.Home.route) {
-                    HomePage(modifier)
+                    HomePage(modifier, navController)
+                }
+
+                composable(
+                    ScreenItem.Detail.route,
+                ) {
+                    val newsItem = News(
+                        null,
+                        null,
+                        it.arguments?.getString("title"),
+                        null,
+                        null,
+                        it.arguments?.getString("url"),
+                        it.arguments?.getString("published"),
+                        it.arguments?.getString("content")
+                    )
+
+                    DetailPage(modifier, newsItem)
                 }
             }
         }
@@ -116,6 +137,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun HomePage(
         modifier: Modifier,
+        navController: NavController,
         homeViewModel: HomeViewModel = hiltViewModel()
     ) {
 
@@ -125,6 +147,8 @@ class MainActivity : ComponentActivity() {
         ItemList(
             modifier,
             {
+                val encodedUrl = URLEncoder.encode(it.urlToImage, StandardCharsets.UTF_8.toString())
+                navController.navigate("detail/$encodedUrl/${it.title}/${it.content}/${it.publishedAt}")
             },
             newsList
         )
@@ -199,7 +223,7 @@ class MainActivity : ComponentActivity() {
 
         Column(
             modifier = modifier.verticalScroll(scrollState),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
             Card(
@@ -209,53 +233,47 @@ class MainActivity : ComponentActivity() {
                 shape = RoundedCornerShape(8.dp)
             ) {
                 AsyncImage(
-                    model = newsModel.urlToImage,
+                    model = URLDecoder.decode(newsModel.urlToImage,StandardCharsets.UTF_8.toString()),
                     contentDescription = null,
                     contentScale = ContentScale.Crop
                 )
             }
 
-            Card(
-                modifier = modifier
-                    .width(IntrinsicSize.Max)
-                    .wrapContentHeight(),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Text(
-                    color = Color.Gray,
-                    text = newsModel.title!!,
-                    textAlign = TextAlign.Left
-                )
 
-                Divider(
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(1.dp)
-                )
+            Text(
+                color = Color.Gray,
+                text = newsModel.title!!,
+                textAlign = TextAlign.Left
+            )
 
-                Text(
-                    color = Color.Gray,
-                    text = newsModel.content!!,
-                    textAlign = TextAlign.Left
-                )
+            Divider(
+                color = Color.LightGray,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+            )
 
-                Divider(
-                    color = Color.Gray,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(1.dp)
-                )
+            Text(
+                color = Color.Gray,
+                text = newsModel.content!!,
+                textAlign = TextAlign.Left
+            )
 
-                Text(
-                    color = Color.Gray,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    text = newsModel.publishedAt!!,
-                    textAlign = TextAlign.Left
-                )
+            Divider(
+                color = Color.LightGray,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+            )
+
+            Text(
+                color = Color.Gray,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                text = newsModel.publishedAt!!,
+                textAlign = TextAlign.Left
+            )
 
 
-            }
         }
     }
 
