@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,9 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -121,30 +120,47 @@ class MainActivity : ComponentActivity() {
     ) {
 
         val newsList by homeViewModel.news.collectAsState()
-        ItemList(modifier, newsList)
+
+
+        ItemList(
+            modifier,
+            {
+            },
+            newsList
+        )
+
 
     }
 
     @Composable
-    private fun ItemList(modifier: Modifier, newsList: List<News>) {
+    private fun ItemList(
+        modifier: Modifier,
+        onClickItem: (news: News) -> Unit,
+        newsList: List<News>
+    ) {
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
             items(items = newsList, itemContent = { news ->
-                NewsItem(item = news, modifier = modifier)
+                NewsItem(item = news, modifier = modifier, onClickItem = onClickItem)
             })
 
         }
     }
 
     @Composable
-    private fun NewsItem(item: News, modifier: Modifier) {
+    private fun NewsItem(
+        item: News,
+        modifier: Modifier,
+        onClickItem: (newsModel: News) -> Unit
+    ) {
         Box(
             modifier
                 .height(80.dp)
                 .width(IntrinsicSize.Max)
+                .clickable { onClickItem(item) }
         ) {
             Row {
 
