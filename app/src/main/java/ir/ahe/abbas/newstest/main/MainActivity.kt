@@ -114,6 +114,9 @@ class MainActivity : ComponentActivity() {
                     HomePage(modifier, navController)
                 }
 
+                composable(ScreenItem.Category.route) {
+                }
+
                 composable(
                     ScreenItem.Detail.route,
                 ) {
