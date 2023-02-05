@@ -117,6 +117,18 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable(ScreenItem.Category.route) {
+
+                    val categoryList: List<CategoryModel> = arrayListOf(
+                        CategoryModel("BBC News", "bbc-news"),
+                        CategoryModel("CNN News", "cnn"),
+                        CategoryModel("FOX News", "fox-news")
+                    )
+
+                    CategoryPage(
+                        modifier = modifier,
+                        categoryList = categoryList,
+                        navController = navController
+                    )
                 }
 
                 composable(
