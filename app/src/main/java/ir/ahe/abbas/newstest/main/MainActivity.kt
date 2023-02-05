@@ -287,8 +287,7 @@ class MainActivity : ComponentActivity() {
     private fun CategoryPage(
         modifier: Modifier,
         categoryList: List<CategoryModel>,
-        navController: NavController,
-        onClickItem: (value: String) -> Unit
+        navController: NavController
     ) {
 
         LazyColumn(
@@ -296,10 +295,29 @@ class MainActivity : ComponentActivity() {
         ) {
             items(items = categoryList, itemContent = { item ->
                 Row(
-                    modifier = modifier.fillMaxWidth()
-                        .clickable{onClickItem(item.value)}
+                    modifier = modifier
+                        .height(60.dp)
+                        .fillMaxWidth()
+                        .clickable { }
                 ) {
+                    Spacer(modifier.width(12.dp))
 
+                    Text(
+                        text = item.title,
+                        textAlign = TextAlign.Left,
+                        modifier = modifier
+                            .align(Alignment.CenterVertically)
+                            .weight(0.8F),
+                        maxLines = 1
+                    )
+
+                    Icon(
+                        modifier = modifier
+                            .weight(0.2f)
+                            .align(Alignment.CenterVertically),
+                        painter = painterResource(id = R.drawable.ic_baseline_chevron_right_24),
+                        contentDescription = ""
+                    )
                 }
             })
         }
