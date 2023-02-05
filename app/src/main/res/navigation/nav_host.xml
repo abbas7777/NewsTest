@@ -30,7 +30,7 @@
         android:label="DetailFragment">
 
         <argument
-            app:argType="ir.ahe.abbas.newstest.Models.News"
+            app:argType="ir.ahe.abbas.newstest.models.News"
             android:name="news"/>
     </fragment>
     <fragment
