@@ -34,6 +34,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import ir.ahe.abbas.newstest.R
+import ir.ahe.abbas.newstest.category.news.NewsViewModel
 import ir.ahe.abbas.newstest.home.HomeViewModel
 import ir.ahe.abbas.newstest.models.CategoryModel
 import ir.ahe.abbas.newstest.models.News
@@ -159,7 +160,6 @@ class MainActivity : ComponentActivity() {
     ) {
 
         val newsList by homeViewModel.news.collectAsState()
-
 
         ItemList(
             modifier,
@@ -310,7 +310,9 @@ class MainActivity : ComponentActivity() {
                     modifier = modifier
                         .height(60.dp)
                         .fillMaxWidth()
-                        .clickable { }
+                        .clickable {
+                            navController.navigate("news/${item.value}")
+                        }
                 ) {
                     Spacer(modifier.width(12.dp))
 
@@ -333,6 +335,26 @@ class MainActivity : ComponentActivity() {
                 }
             })
         }
+    }
+
+    @Composable
+    private fun NewsPage(
+        modifier: Modifier,
+        category: String,
+        navController: NavController,
+        newsViewModel: NewsViewModel = hiltViewModel()
+    ) {
+        newsViewModel.getCatNews(category,"79819d81c81c4b5aa23c25e99ce15029")
+        val newsList by newsViewModel.news.collectAsState()
+
+        ItemList(
+            modifier,
+            {
+                val encodedUrl = URLEncoder.encode(it.urlToImage, StandardCharsets.UTF_8.toString())
+                navController.navigate("detail/$encodedUrl/${it.title}/${it.content}/${it.publishedAt}")
+            },
+            newsList
+        )
     }
 
     @Preview
