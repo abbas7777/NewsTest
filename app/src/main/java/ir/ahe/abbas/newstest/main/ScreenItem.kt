@@ -13,4 +13,5 @@ sealed class ScreenItem(
     object Home : ScreenItem("home", R.string.bnav_home, R.drawable.ic_home_24dp)
     object Category : ScreenItem("category", R.string.bnav_cat, R.drawable.ic_cat_24dp)
     object Detail : ScreenItem("detail/{url}/{title}/{content}/{published}")
+    object NewsPage : ScreenItem("news/{category}")
 }
