@@ -281,6 +281,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    private fun CategoryPage(modifier: Modifier, navController: NavController) {
+
+    }
+
     @Preview
     @Composable
     private fun Preview() {
