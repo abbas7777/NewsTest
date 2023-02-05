@@ -33,7 +33,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.home.HomeViewModel
+import ir.ahe.abbas.newstest.models.CategoryModel
 import ir.ahe.abbas.newstest.models.News
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -282,8 +284,25 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun CategoryPage(modifier: Modifier, navController: NavController) {
+    private fun CategoryPage(
+        modifier: Modifier,
+        categoryList: List<CategoryModel>,
+        navController: NavController,
+        onClickItem: (value: String) -> Unit
+    ) {
 
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(items = categoryList, itemContent = { item ->
+                Row(
+                    modifier = modifier.fillMaxWidth()
+                        .clickable{onClickItem(item.value)}
+                ) {
+
+                }
+            })
+        }
     }
 
     @Preview
