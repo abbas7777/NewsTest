@@ -148,6 +148,14 @@ class MainActivity : ComponentActivity() {
 
                     DetailPage(modifier, newsItem)
                 }
+
+                composable(
+                    ScreenItem.NewsPage.route,
+                ) {
+                    val category= it.arguments?.getString("category")
+
+                    NewsPage(modifier, category!!, navController)
+                }
             }
         }
     }
@@ -344,7 +352,7 @@ class MainActivity : ComponentActivity() {
         navController: NavController,
         newsViewModel: NewsViewModel = hiltViewModel()
     ) {
-        newsViewModel.getCatNews(category,"79819d81c81c4b5aa23c25e99ce15029")
+        newsViewModel.getCatNews(category, "79819d81c81c4b5aa23c25e99ce15029")
         val newsList by newsViewModel.news.collectAsState()
 
         ItemList(
