@@ -1,6 +1,7 @@
 package ir.ahe.abbas.newstest.database
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ir.ahe.abbas.newstest.models.SourceModel
@@ -9,29 +10,29 @@ import ir.ahe.abbas.newstest.models.SourceModel
 class NewsEntity (
 
     @PrimaryKey(autoGenerate = true)
-    val id:Int?,
+    val ide:Int?,
 
-    @ColumnInfo(name = "source")
+    @Embedded
     var source: SourceModel,
 
-    @ColumnInfo(name = "author")
+    @ColumnInfo(name = "author", defaultValue = "author")
     var author: String,
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "title", defaultValue = "title")
     var title: String,
 
-    @ColumnInfo(name = "description")
+    @ColumnInfo(name = "description", defaultValue = "description")
     var description: String,
 
-    @ColumnInfo(name = "url")
+    @ColumnInfo(name = "url", defaultValue = "url")
     var url: String,
 
-    @ColumnInfo(name = "urlToImage")
+    @ColumnInfo(name = "urlToImage", defaultValue = "urlToImage")
     var urlToImage: String,
 
-    @ColumnInfo(name = "publishedAt")
+    @ColumnInfo(name = "publishedAt", defaultValue = "publishedAt")
     var publishedAt: String,
 
-    @ColumnInfo(name = "content")
+    @ColumnInfo(name = "content", defaultValue = "content")
     var content: String
 )
