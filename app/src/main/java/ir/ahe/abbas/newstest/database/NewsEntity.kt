@@ -9,7 +9,7 @@ import ir.ahe.abbas.newstest.models.SourceModel
 class NewsEntity (
 
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    val id:Int?,
 
     @ColumnInfo(name = "source")
     var source: SourceModel,
