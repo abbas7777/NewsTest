@@ -10,4 +10,8 @@ class HomeDbDataSource @Inject constructor(private val newsDao: NewsDao) {
     fun getNewsFromLocal(): Flow<List<NewsEntity>> {
         return newsDao.getAllNews()
     }
+
+    suspend fun addNews(listNews: List<NewsEntity>) {
+        newsDao.insertAll(listNews)
+    }
 }
