@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @InstallIn(App::class)
 @Module
-object DatabaseModule {
+class DatabaseModule {
 
     @Provides
     fun provideNewsDao(database: Database): NewsDao {
