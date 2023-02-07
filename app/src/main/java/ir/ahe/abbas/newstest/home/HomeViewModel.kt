@@ -11,27 +11,33 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor( private val homeRepository: HomeRepository) : ViewModel() {
 
-
     init {
-        getNews(
-            "Apple",
-            "2023-01-12",
-            "popularity",
-            "79819d81c81c4b5aa23c25e99ce15029"
-        )
+        getNews()
+        getNewsFromLocal()
     }
-
 
     var news = MutableStateFlow<List<News>>(emptyList())
 
-    fun getNews(q:String, from:String, sortBy :String, apiKey: String){
+    private fun getNews(){
         viewModelScope.launch{
-            homeRepository.getNews(q, from, sortBy, apiKey).collect {
+            homeRepository.getNews(
+                "Apple",
+                "2023-01-12",
+                "popularity",
+                "79819d81c81c4b5aa23c25e99ce15029"
+
+            ).collect {
                 news.emit(it)
             }
 
         }
     }
 
-
+   private fun getNewsFromLocal(){
+       viewModelScope.launch {
+           homeRepository.getNewsLocal().collect{
+               news.emit(it)
+           }
+       }
+   }
 }
