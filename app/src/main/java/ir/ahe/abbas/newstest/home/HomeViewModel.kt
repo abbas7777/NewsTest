@@ -27,7 +27,7 @@ class HomeViewModel @Inject constructor( private val homeRepository: HomeReposit
                 "79819d81c81c4b5aa23c25e99ce15029"
 
             ).collect {
-                news.emit(it)
+                homeRepository.addNews(it)
             }
 
         }
