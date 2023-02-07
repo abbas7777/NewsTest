@@ -1,5 +1,6 @@
 package ir.ahe.abbas.newstest.home
 
+import ir.ahe.abbas.newstest.database.NewsEntity
 import ir.ahe.abbas.newstest.models.News
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -33,6 +34,24 @@ class HomeRepository @Inject constructor(
                 )
             }
         }
+    }
+
+    suspend fun addNews(listNews: List<News>) {
+        homeDbDataSource.addNews(
+            listNewsEntity = listNews.map {
+                NewsEntity(
+                    null,
+                    it.source!!,
+                    it.author!!,
+                    it.title!!,
+                    it.description!!,
+                    it.url!!,
+                    it.urlToImage!!,
+                    it.publishedAt!!,
+                    it.content!!
+                )
+            }
+        )
     }
 
 }

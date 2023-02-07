@@ -11,7 +11,7 @@ class HomeDbDataSource @Inject constructor(private val newsDao: NewsDao) {
         return newsDao.getAllNews()
     }
 
-    suspend fun addNews(listNews: List<NewsEntity>) {
-        newsDao.insertAll(listNews)
+    suspend fun addNews(listNewsEntity: List<NewsEntity>) {
+        newsDao.insertAll(listNewsEntity)
     }
 }
