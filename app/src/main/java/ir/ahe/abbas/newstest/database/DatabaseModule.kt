@@ -6,24 +6,24 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import ir.ahe.abbas.newstest.App
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(App::class)
 @Module
-class DatabaseModule {
+@InstallIn(SingletonComponent::class)
+object  DatabaseModule {
 
     @Provides
-    fun provideNewsDao(database: Database): NewsDao {
-        return database.newsDao()
+    fun provideNewsDao(database: NewsDatabase): NewsDao {
+        return database.newsDao
     }
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context: Context): Database {
+    fun provideDatabase(@ApplicationContext context: Context): NewsDatabase {
         return Room.databaseBuilder(
             context = context,
-            Database::class.java,
+            NewsDatabase::class.java,
             "Database"
         ).build()
     }
