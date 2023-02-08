@@ -42,7 +42,7 @@ class HomeRepository @Inject constructor(
                 NewsEntity(
                     null,
                     it.source!!,
-                    it.author!!,
+                    "",
                     it.title!!,
                     it.description!!,
                     it.url!!,
