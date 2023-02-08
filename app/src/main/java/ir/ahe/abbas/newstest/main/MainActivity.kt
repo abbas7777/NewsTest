@@ -32,6 +32,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import coil.compose.AsyncImage
 import ir.ahe.abbas.newstest.R
 import ir.ahe.abbas.newstest.category.news.NewsViewModel
@@ -40,6 +42,7 @@ import ir.ahe.abbas.newstest.models.CategoryModel
 import ir.ahe.abbas.newstest.models.News
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -51,7 +54,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppScreen()
         }
-
+        val getNewsRequest =
+            PeriodicWorkRequestBuilder<GetNewsWorker>(1, TimeUnit.SECONDS)
+                .build()
+        WorkManager
+            .getInstance(this)
+            .enqueue(getNewsRequest)
     }
 
     @Composable
