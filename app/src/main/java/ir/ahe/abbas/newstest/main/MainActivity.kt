@@ -7,17 +7,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ir.ahe.abbas.newstest.home.HomeViewModel
-import ir.ahe.abbas.newstest.main.components.ItemList
+import ir.ahe.abbas.newstest.home.HomePage
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -58,16 +53,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    @Composable
-    private fun HomePage(
-        modifier: Modifier = Modifier,
-        navController: NavController,
-        homeViewModel: HomeViewModel = hiltViewModel()
-    ) {
-        val newsList by homeViewModel.news.collectAsState()
-        ItemList(modifier, newsList)
     }
 
     @Preview
