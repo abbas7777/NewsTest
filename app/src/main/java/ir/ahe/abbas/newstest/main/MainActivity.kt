@@ -4,14 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ir.ahe.abbas.newstest.home.HomeViewModel
+import ir.ahe.abbas.newstest.models.News
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -41,9 +50,8 @@ class MainActivity : ComponentActivity() {
                 navController, startDestination = BottomNavItem.Home.route,
                 Modifier.padding(innerPadding)
             ) {
-                composable(ScreenItem.Home.route) {
+                composable(BottomNavItem.Home.route) {
                     HomePage(
-                        modifier,
                         navController = navController
                     )
                 }
@@ -53,14 +61,12 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun HomePage(
-        modifier: Modifier,
+        modifier: Modifier = Modifier,
         navController: NavController,
         homeViewModel: HomeViewModel = hiltViewModel()
     ) {
-
         val newsList by homeViewModel.news.collectAsState()
         ItemList(modifier, newsList)
-
     }
 
     @Composable
@@ -69,49 +75,9 @@ class MainActivity : ComponentActivity() {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-
             items(items = newsList, itemContent = { news ->
                 NewsItem(item = news, modifier = modifier)
             })
-
-
-        }
-    }
-
-    @Composable
-    private fun NewsItem(item: News, modifier: Modifier) {
-        Box(
-            modifier
-                .height(80.dp)
-                .width(IntrinsicSize.Max)
-        ) {
-            Row {
-
-                Spacer(modifier.width(12.dp))
-
-                Card(
-                    modifier
-                        .height(80.dp)
-                        .width(80.dp),
-                    shape = RoundedCornerShape(8.dp)
-                ) {
-                    AsyncImage(
-                        model = item.urlToImage,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop
-                    )
-                }
-
-                Spacer(modifier.width(12.dp))
-
-                Text(
-                    text = item.title!!,
-                    textAlign = TextAlign.Left,
-                    modifier = Modifier.align(Alignment.CenterVertically),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
         }
     }
 
