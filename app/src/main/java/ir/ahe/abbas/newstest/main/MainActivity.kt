@@ -35,8 +35,8 @@ class MainActivity : ComponentActivity() {
     private fun AppScreen() {
 
         val itemList= mutableListOf(
-            ScreenItem.Home,
-            ScreenItem.Category
+            BottomNavItem.Home,
+            BottomNavItem.Category
         )
 
         BottomNavigation(itemList = itemList)
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun BottomNavigation(
-        itemList: MutableList<ScreenItem>
+        itemList: MutableList<BottomNavItem>
     ) {
 
         val navController = rememberNavController()
@@ -86,7 +86,7 @@ class MainActivity : ComponentActivity() {
             }
         ) { innerPadding ->
             NavHost(
-                navController, startDestination = ScreenItem.Home.route,
+                navController, startDestination = BottomNavItem.Home.route,
                 Modifier.padding(innerPadding)
             ) {
                // composable()

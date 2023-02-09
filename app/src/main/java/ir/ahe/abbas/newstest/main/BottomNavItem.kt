@@ -4,12 +4,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import ir.ahe.abbas.newstest.R
 
-sealed class ScreenItem(
+sealed class BottomNavItem(
     val route: String,
     @StringRes val resourceId: Int,
     @DrawableRes val drawableRes: Int
 ) {
 
-    object Home : ScreenItem("home", R.string.bnav_home, R.drawable.ic_home_24dp)
-    object Category : ScreenItem("category", R.string.bnav_cat, R.drawable.ic_cat_24dp)
+    object Home : BottomNavItem("home", R.string.bnav_home, R.drawable.ic_home_24dp)
+    object Category : BottomNavItem("category", R.string.bnav_cat, R.drawable.ic_cat_24dp)
 }
