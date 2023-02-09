@@ -1,33 +1,64 @@
 package ir.ahe.abbas.newstest.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.activity.ComponentActivity
 import dagger.hilt.android.AndroidEntryPoint
-import ir.ahe.abbas.newstest.R
-import ir.ahe.abbas.newstest.databinding.ActivityMainBinding
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import ir.ahe.abbas.newstest.home.HomePage
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root as View)
 
-        setUpViews()
+        setContent {
+            AppScreen()
+        }
     }
 
-    private fun setUpViews() {
-        val bnvMain=binding.btmMainActivityMenu
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navC = navHostFragment.navController
+    @Composable
+    private fun AppScreen() {
 
-        bnvMain.setupWithNavController(navC)
+        val itemList = listOf(
+            BottomNavItem.Home,
+            BottomNavItem.Category
+        )
+        val navController = rememberNavController()
 
+        Scaffold(
+            bottomBar = {
+                ir.ahe.abbas.newstest.main.components.BottomNavigation(
+                    itemList = itemList,
+                    navController
+                )
+            }
+        ) { innerPadding ->
+            NavHost(
+                navController, startDestination = BottomNavItem.Home.route,
+                Modifier.padding(innerPadding)
+            ) {
+                composable(BottomNavItem.Home.route) {
+                    HomePage(
+                        navController = navController
+                    )
+                }
+            }
+        }
     }
+
+    @Preview
+    @Composable
+    private fun Preview() {
+        AppScreen()
+    }
+
 }
