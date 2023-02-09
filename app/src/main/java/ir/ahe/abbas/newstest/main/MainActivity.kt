@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
                                     contentDescription = null
                                 )
                             },
-                            label = { Text(text = stringResource(id = item.resourceId)) },
+                            label = { Text(text = stringResource(id = item.label)) },
                             selected = currentDestination?.hierarchy?.any
                             { it.route == item.route } == true,
                             onClick = {

@@ -6,7 +6,7 @@ import ir.ahe.abbas.newstest.R
 
 sealed class BottomNavItem(
     val route: String,
-    @StringRes val resourceId: Int,
+    @StringRes val label: Int,
     @DrawableRes val drawableRes: Int
 ) {
 
