@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ir.ahe.abbas.newstest.home.HomeViewModel
+import ir.ahe.abbas.newstest.main.components.NewsItem
 import ir.ahe.abbas.newstest.models.News
 
 @AndroidEntryPoint
@@ -44,7 +45,12 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
 
         Scaffold(
-            bottomBar = { BottomNavigation(itemList = itemList, navController) }
+            bottomBar = {
+                ir.ahe.abbas.newstest.main.components.BottomNavigation(
+                    itemList = itemList,
+                    navController
+                )
+            }
         ) { innerPadding ->
             NavHost(
                 navController, startDestination = BottomNavItem.Home.route,

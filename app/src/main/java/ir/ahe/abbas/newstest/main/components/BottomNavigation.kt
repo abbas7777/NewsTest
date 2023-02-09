@@ -1,4 +1,4 @@
-package ir.ahe.abbas.newstest.main
+package ir.ahe.abbas.newstest.main.components
 
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import ir.ahe.abbas.newstest.main.BottomNavItem
 
 @Composable
  fun BottomNavigation(
