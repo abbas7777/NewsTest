@@ -4,22 +4,40 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.ahe.abbas.newstest.models.News
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableStateFlow
+
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor( private val homeRepository: HomeRepository) : ViewModel() {
 
-    private var _news: MutableLiveData<List<News>> =MutableLiveData()
-    var news: LiveData<List<News>> = _news
+    init {
+        getNews()
+        getNewsFromLocal()
+    }
 
-    fun getNews(q:String, from:String, sortBy :String, apiKey: String){
+    var news = MutableStateFlow<List<News>>(emptyList())
+
+    private fun getNews(){
         viewModelScope.launch{
-            homeRepository.getNews(q, from, sortBy, apiKey).collect {
-                _news.postValue(it)
+            homeRepository.getNews(
+                "Apple",
+                "2023-01-12",
+                "popularity",
+                "79819d81c81c4b5aa23c25e99ce15029"
+
+            ).collect {
+                homeRepository.addNews(it)
             }
 
         }
     }
 
-
+   private fun getNewsFromLocal(){
+       viewModelScope.launch {
+           homeRepository.getNewsLocal().collect{
+               news.emit(it)
+           }
+       }
+   }
 }

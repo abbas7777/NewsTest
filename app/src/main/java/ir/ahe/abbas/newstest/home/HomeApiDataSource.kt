@@ -22,7 +22,7 @@ class HomeApiDataSource @Inject constructor(private val api: HttpClient) {
                 }
             }.body()
         }catch (e:Throwable){
-            responseModel = ResponseModel("500",0,null)
+            responseModel = ResponseModel("500",0, emptyList())
             e.printStackTrace()
         }
 
